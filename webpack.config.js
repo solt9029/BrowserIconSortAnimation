@@ -1,9 +1,11 @@
-var path=require("path");
-var webpack=require("webpack");
+var path = require("path");
+var webpack = require("webpack");
 
 module.exports = {
   entry: {
-    index: __dirname+'/src/js/index.js'
+    index: __dirname + '/src/js/index.js',
+    proposed: __dirname + '/src/js/proposed.js',
+    reflow: __dirname + '/src/js/reflow.js'
   },
   output: {
     path: __dirname+"/dist/js",
