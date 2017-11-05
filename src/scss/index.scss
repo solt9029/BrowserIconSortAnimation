@@ -1,34 +1,34 @@
 .card{
-	width:180px;
-	height:180px;
-	border: medium solid #000;
-	position:absolute;
+    width:180px;
+    height:180px;
+    border: medium solid #000;
+    position:absolute;
 }
 
 .pushAnimation{
-	animation-name:pushAnimation;
-	animation-duration:1000ms;
+    animation-name:pushAnimation;
+    animation-duration:1000ms;
 }
 
 @keyframes pushAnimation{
-	0%{
-		background-color:#fff;
-		transform: rotateY(0deg);
-	}
-	50%{
-		background-color:#555;
-		transform: rotateY(180deg);
-	}
-	100%{
-		background-color:#fff;
-		transform: rotateY(360deg);
-	}
+    0%{
+        background-color:#fff;
+        transform: rotateY(0deg);
+    }
+    50%{
+        background-color:#555;
+        transform: rotateY(180deg);
+    }
+    100%{
+        background-color:#fff;
+        transform: rotateY(360deg);
+    }
 }
 
 #card1, #card2{
-	cursor:pointer;
+    cursor:pointer;
 }
 
 .card:hover{
-	background-color: #ccc;
+    background-color: #ccc;
 }
