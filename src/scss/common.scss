@@ -1,8 +1,9 @@
+$size: 180px;
 .card{
-    width:180px;
-    height:180px;
+    width: $size;
+    height: $size;
     border: medium solid #000;
-    position:absolute;
+    position: absolute;
 }
 
 .card:hover{
