@@ -6,6 +6,7 @@ import '../scss/common.scss';
 const SIZE = 180;
 const SPACE = 20;
 const query = getQuery();
+let patterns = newTwoDimensionalArray(query['num'], query['num']);
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -15,7 +16,7 @@ $(() => {
     // ベースとなる横にならぶアイコン数を、ウィンドウ幅から計算して決める。0になってしまう場合には1を代入する
     const BASE_X_NUM = Math.floor(window.innerWidth - SPACE) / (SPACE + SIZE) > 0 ? Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE)) : 1;
 
-    let patterns = newTwoDimensionalArray(query['num'], query['num']);
+    // 初期化時のウィンドウサイズに応じて
     for (let i = 0; i < query['num']; i++) {
         patterns[BASE_X_NUM - 1][i] = i;
     }
