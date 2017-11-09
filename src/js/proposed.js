@@ -30,8 +30,20 @@ $(() => {
         patterns[i] = getPlusPattern(patterns[i - 1], i);
     }
 
-    console.log(patterns);
+    initIcons();
 });
+
+function initIcons() {
+    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
+        for (let x = 0; x < xNum; x++) {
+            $(`#card${patterns[xNum - 1][x + y * xNum]}`).animate({
+                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
+                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
+            }, 500);
+        }
+    }
+}
 
 function getQuery() {
     if(window.location.search === "") return;
