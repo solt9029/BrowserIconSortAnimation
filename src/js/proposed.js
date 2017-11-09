@@ -7,6 +7,7 @@ const SIZE = 180;
 const SPACE = 20;
 const query = getQuery();
 let patterns = newTwoDimensionalArray(query['num'], query['num']);
+let prevPatternIndex;
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
