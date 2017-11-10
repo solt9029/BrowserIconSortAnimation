@@ -1,11 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
-
 import '../scss/common.scss';
+import * as util from './util';
+import { SIZE, SPACE } from "./const";
 
-const SIZE = 180;
-const SPACE = 20;
-const query = getQuery();
+const query = util.getQuery();
 let prevXNum;
 
 $(() => {
@@ -14,24 +13,23 @@ $(() => {
     }
 
     initIcons();
-});
 
-$(window).on('resize', function() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-
-    if (prevXNum === xNum) {
-        return;
-    }
-
-    sortIcons(prevXNum, xNum);
-
-    prevXNum = xNum;
+    // 300ミリ秒ごとにウィンドウ幅を確認する
+    setInterval(function() {
+        let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+        if (xNum > query['num']) {
+            xNum = query['num'];
+        }
+        sortIcons(prevXNum, xNum);
+        prevXNum = xNum;
+    }, 300);
 });
 
 function sortIcons(startXNum, endXNum) {
+    if (startXNum === endXNum) {
+        return;
+    }
+
     for (let xNum = startXNum; xNum < endXNum; xNum++) {
         for (let y = 0; y < Math.ceil(query['num'] / (xNum + 1)); y++) {
             for (let x = 0; x < xNum + 1; x++) {
@@ -72,19 +70,4 @@ function initIcons() {
             }, 500);
         }
     }
-}
-
-function getQuery() {
-    if(window.location.search === "") return;
-    const variables = window.location.search.split("?")[1].split("&");
-    const obj = {};
-    variables.forEach(function(v, i) {
-        const variable = v.split("=");
-        obj[variable[0]] = Number(variable[1]);
-    });
-    return obj;
-}
-
-function newTwoDimensionalArray(x, y) {
-    return Array.from(new Array(y), () => new Array(x).fill(0));
 }

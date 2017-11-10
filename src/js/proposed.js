@@ -2,9 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
 import '../scss/common.scss';
 import * as util from './util';
+import { SIZE, SPACE } from "./const";
 
-const SIZE = 180;
-const SPACE = 20;
 const query = util.getQuery();
 let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
 let prevXNum;
