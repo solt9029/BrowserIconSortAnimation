@@ -6,6 +6,7 @@ import { SIZE, SPACE } from "./const";
 
 const query = util.getQuery();
 let prevXNum;
+let isStep = true;
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -23,11 +24,20 @@ $(() => {
         sortIcons(prevXNum, xNum);
         prevXNum = xNum;
     }, 300);
+
+    $(window).keydown(function(e) {
+        isStep = !isStep;
+        console.log('isStep:' + isStep);
+    });
 });
 
 function sortIcons(startXNum, endXNum) {
     if (startXNum === endXNum) {
         return;
+    }
+
+    if (!isStep) {
+        startXNum = endXNum - 1;
     }
 
     for (let xNum = startXNum; xNum < endXNum; xNum++) {
