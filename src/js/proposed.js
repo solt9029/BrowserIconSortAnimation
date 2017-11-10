@@ -7,7 +7,7 @@ const SIZE = 180;
 const SPACE = 20;
 const query = getQuery();
 let patterns = newTwoDimensionalArray(query['num'], query['num']);
-let prevPatternIndex;
+let prevXNum;
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -33,10 +33,49 @@ $(() => {
     initIcons();
 });
 
+$(window).on('resize', function() {
+    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+
+    if (prevXNum === xNum) {
+        return;
+    }
+
+    sortIcons(prevXNum, xNum);
+
+    prevXNum = xNum;
+});
+
+function sortIcons(startXNum, endXNum) {
+    for (let xNum = startXNum; xNum < endXNum; xNum++) {
+        for (let y = 0; y < Math.ceil(query['num'] / (xNum + 1)); y++) {
+            for (let x = 0; x < xNum + 1; x++) {
+                $(`#card${patterns[xNum][x + y * (xNum + 1)]}`).animate({
+                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
+                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
+                }, 500);
+            }
+        }
+    }
+
+    for (let xNum = startXNum; xNum > endXNum; xNum--) {
+        for (let y = 0; y < Math.ceil(query['num'] / (xNum - 1)); y++) {
+            for (let x = 0; x < xNum - 1; x++) {
+                $(`#card${patterns[xNum - 2][x + y * (xNum - 1)]}`).animate({
+                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
+                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
+                }, 500);
+            }
+        }
+    }
+}
+
 function initIcons() {
     let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
     for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
         for (let x = 0; x < xNum; x++) {
+            if (x + y * xNum >= query['num']) {
+                break;
+            }
             $(`#card${patterns[xNum - 1][x + y * xNum]}`).animate({
                 'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                 'left': (x * (SIZE + SPACE) + SPACE) + 'px'
