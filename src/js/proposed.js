@@ -15,18 +15,24 @@ $(() => {
     }
 
     // ベースとなる横にならぶアイコン数を、ウィンドウ幅から計算して決める。0になってしまう場合には1を代入する
-    const BASE_X_NUM = Math.floor(window.innerWidth - SPACE) / (SPACE + SIZE) > 0 ? Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE)) : 1;
+    let baseXNum = 1;
+    if (Math.floor(window.innerWidth - SPACE) / (SPACE + SIZE) > 0) {
+        baseXNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
+    }
+    if (baseXNum > query['num']) {
+        baseXNum = query['num'];
+    }
 
     // 初期化時のウィンドウサイズに応じて
     for (let i = 0; i < query['num']; i++) {
-        patterns[BASE_X_NUM - 1][i] = i;
+        patterns[baseXNum - 1][i] = i;
     }
     // 減る場合
-    for (let i = (BASE_X_NUM - 1) - 1; i >= 0; i--) {
+    for (let i = (baseXNum - 1) - 1; i >= 0; i--) {
         patterns[i] = getMinusPattern(patterns[i + 1], i + 2);
     }
     // 増える場合
-    for (let i = BASE_X_NUM; i < query['num']; i++) {
+    for (let i = baseXNum; i < query['num']; i++) {
         patterns[i] = getPlusPattern(patterns[i - 1], i);
     }
 
@@ -35,6 +41,9 @@ $(() => {
 
 $(window).on('resize', function() {
     let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+    if (xNum > query['num']) {
+        xNum = query['num'];
+    }
 
     if (prevXNum === xNum) {
         return;
@@ -71,6 +80,10 @@ function sortIcons(startXNum, endXNum) {
 
 function initIcons() {
     let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+    if (xNum > query['num']) {
+        xNum = query['num'];
+    }
+
     for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
         for (let x = 0; x < xNum; x++) {
             if (x + y * xNum >= query['num']) {
