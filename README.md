@@ -9,11 +9,13 @@ cd BrowserIconSortAnimation
 npm install
 ```
 
-` npm run serve ` だけでは上手く行かないので、2つのターミナルを開いて以下のコマンドを打ってください
+- http://localhost:8080 から確認可能にする（ローカルサーバ）
 
 ```
 npm run serve
 ```
+
+- ファイルの変更を監視する
 
 ```
 npm run watch
