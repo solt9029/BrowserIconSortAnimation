@@ -37,24 +37,23 @@ $(() => {
     }
 
     initIcons();
-});
 
-$(window).on('resize', function() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-
-    if (prevXNum === xNum) {
-        return;
-    }
-
-    sortIcons(prevXNum, xNum);
-
-    prevXNum = xNum;
+    // 300ミリ秒ごとにウィンドウ幅を確認する
+    setInterval(function() {
+        let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+        if (xNum > query['num']) {
+            xNum = query['num'];
+        }
+        sortIcons(prevXNum, xNum);
+        prevXNum = xNum;
+    }, 300);
 });
 
 function sortIcons(startXNum, endXNum) {
+    if (startXNum === endXNum) {
+        return;
+    }
+
     for (let xNum = startXNum; xNum < endXNum; xNum++) {
         for (let y = 0; y < Math.ceil(query['num'] / (xNum + 1)); y++) {
             for (let x = 0; x < xNum + 1; x++) {
