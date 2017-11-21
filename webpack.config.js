@@ -5,7 +5,8 @@ module.exports = {
   entry: {
     index: __dirname + '/src/js/index.js',
     proposed: __dirname + '/src/js/proposed.js',
-    reflow: __dirname + '/src/js/reflow.js'
+    reflow: __dirname + '/src/js/reflow.js',
+    scaling: __dirname + '/src/js/scaling.js'
   },
   output: {
     path: __dirname+"/dist/js",
