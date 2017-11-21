@@ -2,75 +2,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
 import '../scss/common.scss';
 import * as util from './util';
-import { SIZE, SPACE } from "./const";
 
 const query = util.getQuery();
 let prevXNum;
+const RATIO = 1.0 / 9.0; // size と space の割合
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
         $('body').append(`<div class="card" id="card${i}">${i}</div>`);
     }
 
-    initIcons();
+    scaling();
 });
 
 $(window).on('resize', function() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-    sortIcons(prevXNum, xNum);
-    prevXNum = xNum;
+    scaling();
 });
 
-function sortIcons(startXNum, endXNum) {
-    if (startXNum === endXNum) {
-        return;
-    }
+function scaling() {
+    let yNum = Math.ceil(query['num'] / query['xnum']);
+    let xSizeUnitNum = query['xnum'] * 1 + RATIO * (query['xnum'] + 1);
+    let ySizeUnitNum = yNum * 1 + RATIO * (yNum + 1);
+    let size = window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
+    const space = size / 9;
 
-    if (!step) {
-        startXNum = endXNum - 1;
-    }
+    $('.card').css('width', size);
+    $('.card').css('height', size);
+    $('.card').css('fontSize', size / 2);
 
-    for (let xNum = startXNum; xNum < endXNum; xNum++) {
-        for (let y = 0; y < Math.ceil(query['num'] / (xNum + 1)); y++) {
-            for (let x = 0; x < xNum + 1; x++) {
-                $(`#card${x + y * (xNum + 1)}`).animate({
-                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, 500);
-            }
-        }
-    }
-
-    for (let xNum = startXNum; xNum > endXNum; xNum--) {
-        for (let y = 0; y < Math.ceil(query['num'] / (xNum - 1)); y++) {
-            for (let x = 0; x < xNum - 1; x++) {
-                $(`#card${x + y * (xNum - 1)}`).animate({
-                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, 500);
-            }
-        }
-    }
-}
-
-function initIcons() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-
-    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
-        for (let x = 0; x < xNum; x++) {
-            if (x + y * xNum >= query['num']) {
-                break;
-            }
-            $(`#card${x + y * xNum}`).animate({
-                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, 500);
+    for (let y = 0; y < Math.ceil(query['num'] / query['xnum']); y++) {
+        for (let x = 0; x < query['xnum']; x++) {
+            $(`#card${x + y * query['xnum']}`).css('top', (y * (size + space) + space) + 'px');
+            $(`#card${x + y * query['xnum']}`).css('left', (x * (size + space) + space) + 'px');
         }
     }
 }
