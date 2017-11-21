@@ -7,7 +7,7 @@ import { SIZE, SPACE } from "./const";
 const query = util.getQuery();
 let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
 let prevXNum;
-let isStep = true;
+const step = query['step']; // 数字1だったら1段階ずつ実行する
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -47,11 +47,6 @@ $(() => {
         sortIcons(prevXNum, xNum);
         prevXNum = xNum;
     }, 300);
-
-    $(window).keydown(function(e) {
-        isStep = !isStep;
-        console.log('isStep:' + isStep);
-    });
 });
 
 function sortIcons(startXNum, endXNum) {
@@ -59,7 +54,7 @@ function sortIcons(startXNum, endXNum) {
         return;
     }
 
-    if (!isStep) {
+    if (!step) {
         startXNum = endXNum - 1;
     }
 
