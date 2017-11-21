@@ -16,14 +16,23 @@ $(() => {
     initIcons();
 
     // 300ミリ秒ごとにウィンドウ幅を確認する
-    setInterval(function() {
-        let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-        if (xNum > query['num']) {
-            xNum = query['num'];
-        }
-        sortIcons(prevXNum, xNum);
-        prevXNum = xNum;
-    }, 300);
+    // setInterval(function() {
+    //     let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+    //     if (xNum > query['num']) {
+    //         xNum = query['num'];
+    //     }
+    //     sortIcons(prevXNum, xNum);
+    //     prevXNum = xNum;
+    // }, 300);
+});
+
+$(window).on('resize', function() {
+    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+    if (xNum > query['num']) {
+        xNum = query['num'];
+    }
+    sortIcons(prevXNum, xNum);
+    prevXNum = xNum;
 });
 
 function sortIcons(startXNum, endXNum) {
