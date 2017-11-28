@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
-import '../scss/common.scss';
+import '../scss/scaling.scss';
 import * as util from './util';
 
 const query = util.getQuery();
