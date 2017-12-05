@@ -9,7 +9,7 @@ const RATIO = 1.0 / 9.0; // size と space の割合
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
-        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
+        $('body').append(`<div class="card" id="card${i}"></div>`);
     }
 
     scaling();

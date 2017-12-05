@@ -1,5 +1,5 @@
 $size: 180px;
-$red: #ee9090;
+$green: #90ee90;
 
 .card{
     width: $size;
@@ -8,11 +8,19 @@ $red: #ee9090;
     position: absolute;
     font-size: 100px;
     text-align: center;
-    background-color: $red;
+    background-color: $green;
     color: #fff;
     -webkit-text-stroke: 2px #000;
 }
 
 .card:hover{
-    background-color: #8b2222;
+    background-color: #228b22;
+}
+
+#card5, #card11{
+    background-color: #ee9090;
+}
+
+#card4, #card10{
+    background-color: #9090ee;
 }

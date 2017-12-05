@@ -10,7 +10,7 @@ const step = query['step'];
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
-        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
+        $('body').append(`<div class="card" id="card${i}"></div>`);
     }
 
     initIcons();

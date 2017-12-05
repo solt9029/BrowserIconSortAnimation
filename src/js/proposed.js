@@ -11,7 +11,7 @@ const step = query['step']; // 数字1だったら1段階ずつ実行する
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
-        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
+        $('body').append(`<div class="card" id="card${i}"></div>`);
     }
 
     // ベースとなる横にならぶアイコン数を、ウィンドウ幅から計算して決める。0になってしまう場合には1を代入する
