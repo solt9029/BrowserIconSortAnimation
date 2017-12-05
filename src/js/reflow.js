@@ -51,7 +51,7 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${x + y * (xNum + 1)}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, 500);
+                }, animation);
             }
         }
     }
@@ -62,7 +62,7 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${x + y * (xNum - 1)}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, 500);
+                }, animation);
             }
         }
     }
@@ -82,7 +82,7 @@ function initIcons() {
             $(`#card${x + y * xNum}`).animate({
                 'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                 'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, 500);
+            }, animation);
         }
     }
 }
