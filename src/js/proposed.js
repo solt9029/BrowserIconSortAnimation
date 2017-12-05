@@ -54,6 +54,27 @@ $(window).on('resize', function() {
     if (xNum > query['num']) {
         xNum = query['num'];
     }
+
+    // 大きくなった時
+    if (xNum > prevXNum && prevXNum === 4) {
+        $('#card4').css('z-index', 100);
+        $('#card10').css('z-index', 100);
+    }
+    if (xNum > prevXNum && prevXNum === 5) {
+        $('#card5').css('z-index', 100);
+        $('#card11').css('z-index', 100);
+    }
+    // 小さくなった時
+    if (xNum < prevXNum && prevXNum === 6) {
+        $('#card5').css('z-index', 100);
+        $('#card11').css('z-index', 100);
+    }
+    if (xNum < prevXNum && prevXNum === 5) {
+        $('#card4').css('z-index', 100);
+        $('#card10').css('z-index', 100);
+    }
+
+
     sortIcons(prevXNum, xNum);
     prevXNum = xNum;
 });
@@ -73,18 +94,12 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${patterns[xNum][x + y * (xNum + 1)]}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, 500);
-            }
-        }
-    }
-
-    for (let xNum = startXNum; xNum > endXNum; xNum--) {
-        for (let y = 0; y < Math.ceil(query['num'] / (xNum - 1)); y++) {
-            for (let x = 0; x < xNum - 1; x++) {
-                $(`#card${patterns[xNum - 2][x + y * (xNum - 1)]}`).animate({
-                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, 500);
+                }, 500, function() {
+                    $('#card4').css('z-index', 1);
+                    $('#card5').css('z-index', 1);
+                    $('#card10').css('z-index', 1);
+                    $('#card11').css('z-index', 1);
+                });
             }
         }
     }
