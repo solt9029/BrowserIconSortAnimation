@@ -7,6 +7,7 @@ import { SIZE, SPACE } from "./const";
 const query = util.getQuery();
 let prevXNum;
 const step = query['step'];
+const animation = query['animation'];
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {

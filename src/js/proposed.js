@@ -8,6 +8,7 @@ const query = util.getQuery();
 let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
 let prevXNum;
 const step = query['step']; // 数字1だったら1段階ずつ実行する
+const animation = query['animation'];
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
