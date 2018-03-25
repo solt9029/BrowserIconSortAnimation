@@ -6,7 +6,8 @@ module.exports = {
     index: __dirname + '/src/js/index.js',
     proposed: __dirname + '/src/js/proposed.js',
     reflow: __dirname + '/src/js/reflow.js',
-    scaling: __dirname + '/src/js/scaling.js'
+    scaling: __dirname + '/src/js/scaling.js',
+    hybrid: __dirname + '/src/js/hybrid.js'
   },
   output: {
     path: __dirname+"/dist/js",
