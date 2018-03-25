@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
 import '../scss/hybrid.scss';
 import * as util from './util';
+import { RATIO, MIN_SIZE } from './const';
 
 const query = util.getQuery();
 let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
