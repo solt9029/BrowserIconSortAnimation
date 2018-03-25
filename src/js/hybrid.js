@@ -7,8 +7,6 @@ import { SIZE, SPACE } from "./const";
 const query = util.getQuery();
 let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
 let prevXNum;
-const step = query['step']; // 数字1だったら1段階ずつ実行する
-const animation = query['animation'];
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -44,7 +42,7 @@ function sortIcons(startXNum, endXNum) {
         return;
     }
 
-    if (!step) {
+    if (!query['step']) {
         startXNum = endXNum - 1;
     }
 
@@ -54,7 +52,7 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${patterns[xNum][x + y * (xNum + 1)]}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, animation);
+                }, query['animation']);
             }
         }
     }
@@ -65,7 +63,7 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${patterns[xNum - 2][x + y * (xNum - 1)]}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, animation);
+                }, query['animation']);
             }
         }
     }
@@ -85,7 +83,7 @@ function initIcons() {
             $(`#card${patterns[xNum - 1][x + y * xNum]}`).animate({
                 'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                 'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, animation);
+            }, query['animation']);
         }
     }
 }
