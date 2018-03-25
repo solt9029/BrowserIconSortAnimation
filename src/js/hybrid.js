@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
-import '../scss/proposed.scss';
+import '../scss/hybrid.scss';
 import * as util from './util';
 import { SIZE, SPACE } from "./const";
 
