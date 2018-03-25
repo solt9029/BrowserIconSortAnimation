@@ -5,7 +5,6 @@ import * as util from './util';
 import { RATIO } from './const';
 
 const query = util.getQuery();
-let prevXNum;
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
