@@ -25,21 +25,21 @@ $(() => {
         patterns[i] = getPlusPattern(patterns[i - 1], i);
     }
 
-    initIcons();
+    prevXNum = proposed(prevXNum);
 });
 
 $(window).on('resize', function() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-    sortIcons(prevXNum, xNum);
-    prevXNum = xNum;
+    prevXNum = proposed(prevXNum);
 });
 
-function sortIcons(startXNum, endXNum) {
+function proposed(startXNum) {
+    let endXNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+    if (endXNum > query['num']) {
+        endXNum = query['num'];
+    }
+
     if (startXNum === endXNum) {
-        return;
+        return endXNum;
     }
 
     if (!query['step']) {
@@ -67,25 +67,8 @@ function sortIcons(startXNum, endXNum) {
             }
         }
     }
-}
 
-function initIcons() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-
-    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
-        for (let x = 0; x < xNum; x++) {
-            if (x + y * xNum >= query['num']) {
-                break;
-            }
-            $(`#card${patterns[xNum - 1][x + y * xNum]}`).animate({
-                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, query['animation']);
-        }
-    }
+    return endXNum;
 }
 
 function getMinusPattern(array, xNum) {
