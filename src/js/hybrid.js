@@ -15,14 +15,7 @@ $(() => {
         $('body').append(`<div class="card" id="card${i}">${i}</div>`);
     }
 
-    // ベースとなる横にならぶアイコン数を、ウィンドウ幅から計算して決める。0になってしまう場合には1を代入する
-    let baseXNum = 1;
-    if (Math.floor(window.innerWidth - SPACE) / (SPACE + SIZE) > 0) {
-        baseXNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
-    }
-    if (baseXNum > query['num']) {
-        baseXNum = query['num'];
-    }
+    let baseXNum = 4;
 
     // 初期化時のウィンドウサイズに応じて
     for (let i = 0; i < query['num']; i++) {
@@ -38,16 +31,6 @@ $(() => {
     }
 
     initIcons();
-
-    // 300ミリ秒ごとにウィンドウ幅を確認する
-    // setInterval(function() {
-    //     let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    //     if (xNum > query['num']) {
-    //         xNum = query['num'];
-    //     }
-    //     sortIcons(prevXNum, xNum);
-    //     prevXNum = xNum;
-    // }, 300);
 });
 
 $(window).on('resize', function() {
