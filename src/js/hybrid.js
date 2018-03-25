@@ -15,18 +15,15 @@ $(() => {
         $('body').append(`<div class="card" id="card${i}">${i}</div>`);
     }
 
-    let baseXNum = 4;
-
-    // 初期化時のウィンドウサイズに応じて
     for (let i = 0; i < query['num']; i++) {
-        patterns[baseXNum - 1][i] = i;
+        patterns[query['xnum'] - 1][i] = i;
     }
     // 減る場合
-    for (let i = (baseXNum - 1) - 1; i >= 0; i--) {
+    for (let i = (query['xnum'] - 1) - 1; i >= 0; i--) {
         patterns[i] = getMinusPattern(patterns[i + 1], i + 2);
     }
     // 増える場合
-    for (let i = baseXNum; i < query['num']; i++) {
+    for (let i = query['xnum']; i < query['num']; i++) {
         patterns[i] = getPlusPattern(patterns[i - 1], i);
     }
 
