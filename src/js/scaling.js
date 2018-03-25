@@ -24,7 +24,7 @@ function scaling() {
     let xSizeUnitNum = query['xnum'] * 1 + RATIO * (query['xnum'] + 1);
     let ySizeUnitNum = yNum * 1 + RATIO * (yNum + 1);
     let size = window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
-    const space = size / 9;
+    const space = size * RATIO;
 
     $('.card').css('width', size);
     $('.card').css('height', size);
