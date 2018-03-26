@@ -19,11 +19,8 @@ $(window).on('resize', function() {
 });
 
 function scaling() {
-    let yNum = Math.ceil(query['num'] / query['xnum']);
-    let xSizeUnitNum = query['xnum'] * 1 + RATIO * (query['xnum'] + 1);
-    let ySizeUnitNum = yNum * 1 + RATIO * (yNum + 1);
-    let size = window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
-    const space = size * RATIO;
+    let size = getSize();
+    const space = getSpace(size);
 
     $('.card').css('width', size);
     $('.card').css('height', size);
@@ -35,4 +32,16 @@ function scaling() {
             $(`#card${x + y * query['xnum']}`).css('left', (x * (size + space) + space) + 'px');
         }
     }
+}
+
+function getSize() {
+    let yNum = Math.ceil(query['num'] / query['xnum']);
+    let xSizeUnitNum = query['xnum'] * 1 + RATIO * (query['xnum'] + 1);
+    let ySizeUnitNum = yNum * 1 + RATIO * (yNum + 1);
+    let size = window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
+    return size;
+}
+
+function getSpace(size) {
+    return size * RATIO;
 }
