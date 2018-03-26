@@ -9,10 +9,7 @@ let size;
 let space;
 
 $(() => {
-    for (let i = 0; i < query['num']; i++) {
-        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
-    }
-
+    addCards();
     scaling();
 });
 
@@ -33,6 +30,12 @@ function scaling() {
             $(`#card${x + y * query['xnum']}`).css('top', (y * (size + space) + space) + 'px');
             $(`#card${x + y * query['xnum']}`).css('left', (x * (size + space) + space) + 'px');
         }
+    }
+}
+
+function addCards() {
+    for (let i = 0; i < query['num']; i++) {
+        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
     }
 }
 
