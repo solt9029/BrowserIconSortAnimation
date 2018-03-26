@@ -68,7 +68,6 @@ function getXNum() {
     if (xNum > query['num']) {
         xNum = query['num'];
     }
-    console.log(xNum);
     return xNum;
 }
 
