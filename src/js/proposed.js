@@ -62,12 +62,13 @@ function addCards() {
 
 function getXNum() {
     let xNum = 1;
-    if (Math.floor(window.innerWidth - SPACE) / (SPACE + SIZE) > 0) {
+    if (Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE)) > 0) {
         xNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
     }
     if (xNum > query['num']) {
         xNum = query['num'];
     }
+    console.log(xNum);
     return xNum;
 }
 
