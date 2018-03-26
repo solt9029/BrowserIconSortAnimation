@@ -5,6 +5,8 @@ import * as util from './util';
 import { RATIO } from './const';
 
 const query = util.getQuery();
+let size;
+let space;
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -19,8 +21,8 @@ $(window).on('resize', function() {
 });
 
 function scaling() {
-    let size = getSize();
-    const space = getSpace(size);
+    size = getSize();
+    space = getSpace();
 
     $('.card').css('width', size);
     $('.card').css('height', size);
@@ -38,10 +40,9 @@ function getSize() {
     let yNum = Math.ceil(query['num'] / query['xnum']);
     let xSizeUnitNum = query['xnum'] * 1 + RATIO * (query['xnum'] + 1);
     let ySizeUnitNum = yNum * 1 + RATIO * (yNum + 1);
-    let size = window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
-    return size;
+    return window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
 }
 
-function getSpace(size) {
+function getSpace() {
     return size * RATIO;
 }
