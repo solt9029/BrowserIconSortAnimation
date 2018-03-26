@@ -6,7 +6,7 @@ import { RATIO, MIN_SIZE, MIN_SPACE } from './const';
 
 const query = util.getQuery();
 let patterns;
-let prevXNum = 0;
+let prevXNum = query['xnum'];
 let prevMethod = 'scaling';
 let size;
 let space;
@@ -26,14 +26,14 @@ function scaling() {
     size = getSize();
     space = getSpace();
 
-    if (size <= MIN_SIZE) {
+    if (size < MIN_SIZE || prevXNum < query['xnum']) {
         size = MIN_SIZE;
         space = getSpace();
         prevXNum = proposed(prevXNum);
     } else {
         for (let y = 0; y < Math.ceil(query['num'] / query['xnum']); y++) {
             for (let x = 0; x < query['xnum']; x++) {
-                $(`#card${x + y * query['xnum']}`).animate(getAnimationJson(x, y), 500);
+                $(`#card${x + y * query['xnum']}`).stop().animate(getAnimationJson(x, y), 500);
             }
         }
         prevXNum = getXNum();
