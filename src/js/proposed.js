@@ -2,13 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
 import '../scss/proposed.scss';
 import * as util from './util';
-import { SIZE, SPACE } from "./const";
+import { SIZE, SPACE } from './const';
 
 const query = util.getQuery();
 let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
-let prevXNum;
-const step = query['step']; // 数字1だったら1段階ずつ実行する
-const animation = query['animation'];
+let prevXNum = 0;
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -37,34 +35,24 @@ $(() => {
         patterns[i] = getPlusPattern(patterns[i - 1], i);
     }
 
-    initIcons();
-
-    // 300ミリ秒ごとにウィンドウ幅を確認する
-    // setInterval(function() {
-    //     let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    //     if (xNum > query['num']) {
-    //         xNum = query['num'];
-    //     }
-    //     sortIcons(prevXNum, xNum);
-    //     prevXNum = xNum;
-    // }, 300);
+    prevXNum = proposed(prevXNum);
 });
 
 $(window).on('resize', function() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-    sortIcons(prevXNum, xNum);
-    prevXNum = xNum;
+    prevXNum = proposed(prevXNum);
 });
 
-function sortIcons(startXNum, endXNum) {
-    if (startXNum === endXNum) {
-        return;
+function proposed(startXNum) {
+    let endXNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+    if (endXNum > query['num']) {
+        endXNum = query['num'];
     }
 
-    if (!step) {
+    if (startXNum === endXNum) {
+        return endXNum;
+    }
+
+    if (!query['step']) {
         startXNum = endXNum - 1;
     }
 
@@ -74,7 +62,7 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${patterns[xNum][x + y * (xNum + 1)]}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, animation);
+                }, query['animation']);
             }
         }
     }
@@ -85,29 +73,12 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${patterns[xNum - 2][x + y * (xNum - 1)]}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, animation);
+                }, query['animation']);
             }
         }
     }
-}
 
-function initIcons() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-
-    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
-        for (let x = 0; x < xNum; x++) {
-            if (x + y * xNum >= query['num']) {
-                break;
-            }
-            $(`#card${patterns[xNum - 1][x + y * xNum]}`).animate({
-                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, animation);
-        }
-    }
+    return endXNum;
 }
 
 function getMinusPattern(array, xNum) {
