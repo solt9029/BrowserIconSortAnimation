@@ -5,36 +5,12 @@ import * as util from './util';
 import { SIZE, SPACE } from './const';
 
 const query = util.getQuery();
-let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
+let patterns;
 let prevXNum = 0;
 
 $(() => {
-    for (let i = 0; i < query['num']; i++) {
-        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
-    }
-
-    // ベースとなる横にならぶアイコン数を、ウィンドウ幅から計算して決める。0になってしまう場合には1を代入する
-    let baseXNum = 1;
-    if (Math.floor(window.innerWidth - SPACE) / (SPACE + SIZE) > 0) {
-        baseXNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
-    }
-    if (baseXNum > query['num']) {
-        baseXNum = query['num'];
-    }
-
-    // 初期化時のウィンドウサイズに応じて
-    for (let i = 0; i < query['num']; i++) {
-        patterns[baseXNum - 1][i] = i;
-    }
-    // 減る場合
-    for (let i = (baseXNum - 1) - 1; i >= 0; i--) {
-        patterns[i] = getMinusPattern(patterns[i + 1], i + 2);
-    }
-    // 増える場合
-    for (let i = baseXNum; i < query['num']; i++) {
-        patterns[i] = getPlusPattern(patterns[i - 1], i);
-    }
-
+    addCards();
+    patterns = getPatterns(getXNum());
     prevXNum = proposed(prevXNum);
 });
 
@@ -43,10 +19,7 @@ $(window).on('resize', function() {
 });
 
 function proposed(startXNum) {
-    let endXNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (endXNum > query['num']) {
-        endXNum = query['num'];
-    }
+    let endXNum = getXNum();
 
     if (startXNum === endXNum) {
         return endXNum;
@@ -79,6 +52,42 @@ function proposed(startXNum) {
     }
 
     return endXNum;
+}
+
+function addCards() {
+    for (let i = 0; i < query['num']; i++) {
+        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
+    }
+}
+
+function getXNum() {
+    let xNum = 1;
+    if (Math.floor(window.innerWidth - SPACE) / (SPACE + SIZE) > 0) {
+        xNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
+    }
+    if (xNum > query['num']) {
+        xNum = query['num'];
+    }
+    return xNum;
+}
+
+function getPatterns(baseXNum) {
+    let returnArray = util.newTwoDimensionalArray(query['num'], query['num']);
+
+    // 初期化時のウィンドウサイズに応じて
+    for (let i = 0; i < query['num']; i++) {
+        returnArray[baseXNum - 1][i] = i;
+    }
+    // 減る場合
+    for (let i = (baseXNum - 1) - 1; i >= 0; i--) {
+        returnArray[i] = getMinusPattern(returnArray[i + 1], i + 2);
+    }
+    // 増える場合
+    for (let i = baseXNum; i < query['num']; i++) {
+        returnArray[i] = getPlusPattern(returnArray[i - 1], i);
+    }
+
+    return returnArray;
 }
 
 function getMinusPattern(array, xNum) {
