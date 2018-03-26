@@ -25,7 +25,7 @@ function proposed(startXNum) {
     }
 
     // 幅が広がる場合
-    for (let xNum = startXNum - 1; xNum < endXNum - 1; xNum++) {
+    for (let xNum = startXNum + 1; xNum < endXNum + 1; xNum++) {
         animateCards(xNum);
     }
     // 幅が狭まる場合

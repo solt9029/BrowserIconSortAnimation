@@ -21,14 +21,22 @@ function scaling() {
     size = getSize();
     space = getSpace();
 
-    $('.card').css('width', size);
-    $('.card').css('height', size);
-    $('.card').css('fontSize', size / 2);
+    animateCards(query['xnum']);
+}
 
-    for (let y = 0; y < Math.ceil(query['num'] / query['xnum']); y++) {
-        for (let x = 0; x < query['xnum']; x++) {
-            $(`#card${x + y * query['xnum']}`).css('top', (y * (size + space) + space) + 'px');
-            $(`#card${x + y * query['xnum']}`).css('left', (x * (size + space) + space) + 'px');
+function animateCards(xNum) {
+    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
+        for (let x = 0; x < xNum; x++) {
+            if (!query['step']) {
+                $(`#card${x + y * xNum}`).stop();
+            }
+            $(`#card${x + y * xNum}`).animate({
+                'top': (y * (size + space) + space) + 'px',
+                'left': (x * (size + space) + space) + 'px',
+                'width': size + 'px',
+                'height': size + 'px',
+                'fontSize': size / 2 + 'px'
+            }, query['animation']);
         }
     }
 }
