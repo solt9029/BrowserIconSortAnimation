@@ -20,38 +20,34 @@ $(window).on('resize', function() {
 
 function proposed(startXNum) {
     let endXNum = getXNum();
-
     if (startXNum === endXNum) {
         return endXNum;
     }
 
-    if (!query['step']) {
-        startXNum = endXNum - 1;
+    // 幅が広がる場合
+    for (let xNum = startXNum - 1; xNum < endXNum - 1; xNum++) {
+        animateCards(xNum);
     }
-
-    for (let xNum = startXNum; xNum < endXNum; xNum++) {
-        for (let y = 0; y < Math.ceil(query['num'] / (xNum + 1)); y++) {
-            for (let x = 0; x < xNum + 1; x++) {
-                $(`#card${patterns[xNum][x + y * (xNum + 1)]}`).animate({
-                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, query['animation']);
-            }
-        }
-    }
-
-    for (let xNum = startXNum; xNum > endXNum; xNum--) {
-        for (let y = 0; y < Math.ceil(query['num'] / (xNum - 1)); y++) {
-            for (let x = 0; x < xNum - 1; x++) {
-                $(`#card${patterns[xNum - 2][x + y * (xNum - 1)]}`).animate({
-                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, query['animation']);
-            }
-        }
+    // 幅が狭まる場合
+    for (let xNum = startXNum - 1; xNum > endXNum - 1; xNum--) {
+        animateCards(xNum);
     }
 
     return endXNum;
+}
+
+function animateCards(xNum) {
+    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
+        for (let x = 0; x < xNum; x++) {
+            if (!query['step']) {
+                $(`#card${patterns[xNum - 1][x + y * xNum]}`).stop();
+            }
+            $(`#card${patterns[xNum - 1][x + y * xNum]}`).animate({
+                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
+                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
+            }, query['animation']);
+        }
+    }
 }
 
 function addCards() {
