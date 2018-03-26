@@ -6,9 +6,9 @@ import { RATIO, MIN_SIZE } from './const';
 
 const query = util.getQuery();
 let patterns = util.newTwoDimensionalArray(query['num'], query['num']);
-let prevXNum;
-let size = 180;
-let space = 20;
+let prevXNum = query['xnum'];
+let size;
+let space;
 
 $(() => {
     for (let i = 0; i < query['num']; i++) {
@@ -27,12 +27,43 @@ $(() => {
         patterns[i] = getPlusPattern(patterns[i - 1], i);
     }
 
-    prevXNum = proposed(prevXNum);
+    hybrid();
 });
 
 $(window).on('resize', function() {
-    prevXNum = proposed(prevXNum);
+    hybrid();
 });
+
+function hybrid() {
+    let yNum = Math.ceil(query['num'] / query['xnum']);
+    let xSizeUnitNum = query['xnum'] * 1 + RATIO * (query['xnum'] + 1);
+    let ySizeUnitNum = yNum * 1 + RATIO * (yNum + 1);
+    size = window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
+    space = size * RATIO;
+
+    // MIN_SIZEより小さくなりそうなスケーリングなら、スケーリングをせずに提案手法を適用する
+    if (size < MIN_SIZE) {
+        size = MIN_SIZE;
+        space = size * RATIO;
+        $('.card').css('width', size);
+        $('.card').css('height', size);
+        $('.card').css('fontSize', size / 2);
+        prevXNum = proposed(prevXNum);
+        console.log("size<min_size");
+        return;
+    }
+
+    $('.card').css('width', size);
+    $('.card').css('height', size);
+    $('.card').css('fontSize', size / 2);
+
+    for (let y = 0; y < Math.ceil(query['num'] / query['xnum']); y++) {
+        for (let x = 0; x < query['xnum']; x++) {
+            $(`#card${x + y * query['xnum']}`).css('top', (y * (size + space) + space) + 'px');
+            $(`#card${x + y * query['xnum']}`).css('left', (x * (size + space) + space) + 'px');
+        }
+    }
+}
 
 function proposed(startXNum) {
     let endXNum = Math.floor((window.innerWidth - space) / (size + space));
