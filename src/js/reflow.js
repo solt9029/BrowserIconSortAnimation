@@ -5,20 +5,16 @@ import * as util from './util';
 import { SIZE, SPACE } from "./const";
 
 const query = util.getQuery();
-let prevXNum;
+let prevXNum = 0;
 
 $(() => {
     addCards();
-    initIcons();
+    prevXNum = sortIcons(prevXNum);
 });
 
 $(window).on('resize', function() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-    sortIcons(prevXNum, xNum);
-    prevXNum = xNum;
+    let xNum = getXNum();
+    prevXNum = sortIcons(prevXNum);
 });
 
 function addCards() {
@@ -27,9 +23,10 @@ function addCards() {
     }
 }
 
-function sortIcons(startXNum, endXNum) {
+function sortIcons(startXNum) {
+    let endXNum = getXNum();
     if (startXNum === endXNum) {
-        return;
+        return endXNum;
     }
 
     if (!query['step']) {
@@ -57,23 +54,17 @@ function sortIcons(startXNum, endXNum) {
             }
         }
     }
+
+    return endXNum;
 }
 
-function initIcons() {
-    let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
+function getXNum() {
+    let xNum = 1;
+    if (Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE)) > 0) {
+        xNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
+    }
     if (xNum > query['num']) {
         xNum = query['num'];
     }
-
-    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
-        for (let x = 0; x < xNum; x++) {
-            if (x + y * xNum >= query['num']) {
-                break;
-            }
-            $(`#card${x + y * xNum}`).animate({
-                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, query['animation']);
-        }
-    }
+    return xNum;
 }
