@@ -1,6 +1,6 @@
 import * as util from '../util';
 
-export default class Method {
+export default class {
     constructor() {
         this.query = util.getQuery();
         this.size = 180;
