@@ -6,25 +6,10 @@ import { SIZE, SPACE } from "./const";
 
 const query = util.getQuery();
 let prevXNum;
-const step = query['step'];
-const animation = query['animation'];
 
 $(() => {
-    for (let i = 0; i < query['num']; i++) {
-        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
-    }
-
+    addCards();
     initIcons();
-
-    // 300ミリ秒ごとにウィンドウ幅を確認する
-    // setInterval(function() {
-    //     let xNum = Math.floor((window.innerWidth - SPACE) / (SIZE + SPACE));
-    //     if (xNum > query['num']) {
-    //         xNum = query['num'];
-    //     }
-    //     sortIcons(prevXNum, xNum);
-    //     prevXNum = xNum;
-    // }, 300);
 });
 
 $(window).on('resize', function() {
@@ -36,12 +21,18 @@ $(window).on('resize', function() {
     prevXNum = xNum;
 });
 
+function addCards() {
+    for (let i = 0; i < query['num']; i++) {
+        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
+    }
+}
+
 function sortIcons(startXNum, endXNum) {
     if (startXNum === endXNum) {
         return;
     }
 
-    if (!step) {
+    if (!query['step']) {
         startXNum = endXNum - 1;
     }
 
@@ -51,7 +42,7 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${x + y * (xNum + 1)}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, animation);
+                }, query['animation']);
             }
         }
     }
@@ -62,7 +53,7 @@ function sortIcons(startXNum, endXNum) {
                 $(`#card${x + y * (xNum - 1)}`).animate({
                     'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                     'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, animation);
+                }, query['animation']);
             }
         }
     }
@@ -82,7 +73,7 @@ function initIcons() {
             $(`#card${x + y * xNum}`).animate({
                 'top': (y * (SIZE + SPACE) + SPACE) + 'px',
                 'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, animation);
+            }, query['animation']);
         }
     }
 }
