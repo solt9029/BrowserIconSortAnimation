@@ -1,16 +1,16 @@
-export function addCards() {
-    for (let i = 0; i < query['num']; i++) {
+export function addCards(num) {
+    for (let i = 0; i < num; i++) {
         $('body').append(`<div class="card" id="card${i}">${i}</div>`);
     }
 }
 
-export function getXNum() {
+export function getXNum(num, size, space) {
     let xNum = 1;
-    if (Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE)) > 0) {
-        xNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
+    if (Math.floor((window.innerWidth - space) / (space + size)) > 0) {
+        xNum = Math.floor((window.innerWidth - space) / (space + size));
     }
-    if (xNum > query['num']) {
-        xNum = query['num'];
+    if (xNum > num) {
+        xNum = num;
     }
     return xNum;
 }
