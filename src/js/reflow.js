@@ -28,33 +28,29 @@ function reflow(startXNum) {
         return endXNum;
     }
 
-    if (!query['step']) {
-        startXNum = endXNum - 1;
+    for (let xNum = startXNum + 1; xNum < endXNum + 1; xNum++) {
+        animateCards(xNum);
     }
 
-    for (let xNum = startXNum; xNum < endXNum; xNum++) {
-        for (let y = 0; y < Math.ceil(query['num'] / (xNum + 1)); y++) {
-            for (let x = 0; x < xNum + 1; x++) {
-                $(`#card${x + y * (xNum + 1)}`).animate({
-                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, query['animation']);
-            }
-        }
-    }
-
-    for (let xNum = startXNum; xNum > endXNum; xNum--) {
-        for (let y = 0; y < Math.ceil(query['num'] / (xNum - 1)); y++) {
-            for (let x = 0; x < xNum - 1; x++) {
-                $(`#card${x + y * (xNum - 1)}`).animate({
-                    'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                    'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-                }, query['animation']);
-            }
-        }
+    for (let xNum = startXNum - 1; xNum > endXNum - 1; xNum--) {
+        animateCards(xNum);
     }
 
     return endXNum;
+}
+
+function animateCards(xNum) {
+    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
+        for (let x = 0; x < xNum; x++) {
+            if (!query['step']) {
+                $(`#card${x + y * xNum}`).stop();
+            }
+            $(`#card${x + y * xNum}`).animate({
+                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
+                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
+            }, query['animation']);
+        }
+    }
 }
 
 function getXNum() {
