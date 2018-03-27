@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
 import '../scss/proposed.scss';
 import * as util from './util';
-import * as common from './common';
 import { SIZE, SPACE } from './const';
 
 const query = util.getQuery();
@@ -10,7 +9,7 @@ let patterns;
 let prevXNum = 0;
 
 $(() => {
-    common.addCards(query['num']);
+    addCards();
     patterns = getPatterns(getXNum());
     prevXNum = proposed(prevXNum);
 });
@@ -20,7 +19,7 @@ $(window).on('resize', function() {
 });
 
 function proposed(startXNum) {
-    let endXNum = common.getXNum(query['num'], SIZE, SPACE);
+    let endXNum = getXNum();
     if (startXNum === endXNum) {
         return endXNum;
     }
@@ -49,6 +48,23 @@ function animateCards(xNum) {
             }, query['animation']);
         }
     }
+}
+
+function addCards() {
+    for (let i = 0; i < query['num']; i++) {
+        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
+    }
+}
+
+function getXNum() {
+    let xNum = 1;
+    if (Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE)) > 0) {
+        xNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
+    }
+    if (xNum > query['num']) {
+        xNum = query['num'];
+    }
+    return xNum;
 }
 
 function getPatterns(baseXNum) {

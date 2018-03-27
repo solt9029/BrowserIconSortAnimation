@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
 import '../scss/scaling.scss';
 import * as util from './util';
-import * as common from './common';
 import { RATIO } from './const';
 
 const query = util.getQuery();
@@ -10,7 +9,7 @@ let size;
 let space;
 
 $(() => {
-    common.addCards(query['num']);
+    addCards();
     scaling();
 });
 
@@ -39,6 +38,12 @@ function animateCards(xNum) {
                 'fontSize': size / 2 + 'px'
             }, query['animation']);
         }
+    }
+}
+
+function addCards() {
+    for (let i = 0; i < query['num']; i++) {
+        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
     }
 }
 
