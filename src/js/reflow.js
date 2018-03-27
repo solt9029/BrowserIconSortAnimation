@@ -9,11 +9,11 @@ let prevXNum = 0;
 
 $(() => {
     addCards();
-    prevXNum = sortIcons(prevXNum);
+    prevXNum = reflow(prevXNum);
 });
 
 $(window).on('resize', function() {
-    prevXNum = sortIcons(prevXNum);
+    prevXNum = reflow(prevXNum);
 });
 
 function addCards() {
@@ -22,7 +22,7 @@ function addCards() {
     }
 }
 
-function sortIcons(startXNum) {
+function reflow(startXNum) {
     let endXNum = getXNum();
     if (startXNum === endXNum) {
         return endXNum;
