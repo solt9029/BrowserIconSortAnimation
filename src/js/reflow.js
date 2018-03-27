@@ -13,7 +13,6 @@ $(() => {
 });
 
 $(window).on('resize', function() {
-    let xNum = getXNum();
     prevXNum = sortIcons(prevXNum);
 });
 
