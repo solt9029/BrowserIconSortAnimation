@@ -3,7 +3,6 @@ import Method from './Method';
 export default class Scaling extends Method {
     constructor() {
         super();
-        this.addCards();
         this.scaling();
         let scaling = this;
         $(window).on('resize', function() {

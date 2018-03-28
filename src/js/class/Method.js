@@ -6,6 +6,7 @@ export default class Method {
         this.size = 180;
         this.space = 20;
         this.ratio = 1.0 / 9.0;
+        this.addCards();
     }
 
     addCards() {
