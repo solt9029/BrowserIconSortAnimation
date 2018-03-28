@@ -5,6 +5,7 @@ export default class Method {
         this.query = util.getQuery();
         this.size = 180;
         this.space = 20;
+        this.ratio = 1.0 / 9.0;
     }
 
     addCards() {

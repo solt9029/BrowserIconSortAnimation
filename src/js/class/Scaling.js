@@ -2,10 +2,13 @@ import Method from './Method';
 
 export default class Scaling extends Method {
     constructor() {
-        this.query = util.getQuery();
-        this.size = 180;
-        this.space = 20;
-        this.ratio = 1.0 / 9.0;
+        super();
+        this.addCards();
+        this.scaling();
+        let scaling = this;
+        $(window).on('resize', function() {
+            scaling.scaling();
+        });
     }
 
     scaling() {
@@ -21,11 +24,11 @@ export default class Scaling extends Method {
                     $(`#card${x + y * this.query['xnum']}`).stop();
                 }
                 $(`#card${x + y * this.query['xnum']}`).animate({
-                    'top': (y * (size + space) + space) + 'px',
-                    'left': (x * (size + space) + space) + 'px',
-                    'width': size + 'px',
-                    'height': size + 'px',
-                    'fontSize': size / 2 + 'px'
+                    'top': (y * (this.size + this.space) + this.space) + 'px',
+                    'left': (x * (this.size + this.space) + this.space) + 'px',
+                    'width': this.size + 'px',
+                    'height': this.size + 'px',
+                    'fontSize': this.size / 2 + 'px'
                 }, this.query['animation']);
             }
         }
