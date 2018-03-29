@@ -34,10 +34,10 @@ export default class Method {
         }
     }
 
-    getXNum() {
+    getXNum(size, space) {
         let xNum = 1;
-        if (Math.floor((window.innerWidth - this.space) / (this.space + this.size)) > 0) {
-            xNum = Math.floor((window.innerWidth - this.space) / (this.space + this.size));
+        if (Math.floor((window.innerWidth - space) / (space + size)) > 0) {
+            xNum = Math.floor((window.innerWidth - space) / (space + size));
         }
         if (xNum > this.query['num']) {
             xNum = this.query['num'];

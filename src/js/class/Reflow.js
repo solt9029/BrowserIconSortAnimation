@@ -22,7 +22,7 @@ export default class Reflow extends Method {
     }
 
     method() {
-        let currentXNum = this.getXNum();
+        let currentXNum = this.getXNum(this.size, this.space);
         if (this.prevXNum === currentXNum) {
             return;
         }
