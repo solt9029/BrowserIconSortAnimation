@@ -1,65 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 require("bootstrap");
 import '../scss/reflow.scss';
-import * as util from './util';
-import { SIZE, SPACE } from "./const";
-
-const query = util.getQuery();
-let prevXNum = 0;
+import Reflow from './class/Reflow';
 
 $(() => {
-    addCards();
-    prevXNum = reflow(prevXNum);
+    new Reflow();
 });
-
-$(window).on('resize', function() {
-    prevXNum = reflow(prevXNum);
-});
-
-function addCards() {
-    for (let i = 0; i < query['num']; i++) {
-        $('body').append(`<div class="card" id="card${i}">${i}</div>`);
-    }
-}
-
-function reflow(startXNum) {
-    let endXNum = getXNum();
-    if (startXNum === endXNum) {
-        return endXNum;
-    }
-
-    for (let xNum = startXNum + 1; xNum < endXNum + 1; xNum++) {
-        animateCards(xNum);
-    }
-
-    for (let xNum = startXNum - 1; xNum > endXNum - 1; xNum--) {
-        animateCards(xNum);
-    }
-
-    return endXNum;
-}
-
-function animateCards(xNum) {
-    for (let y = 0; y < Math.ceil(query['num'] / xNum); y++) {
-        for (let x = 0; x < xNum; x++) {
-            if (!query['step']) {
-                $(`#card${x + y * xNum}`).stop();
-            }
-            $(`#card${x + y * xNum}`).animate({
-                'top': (y * (SIZE + SPACE) + SPACE) + 'px',
-                'left': (x * (SIZE + SPACE) + SPACE) + 'px'
-            }, query['animation']);
-        }
-    }
-}
-
-function getXNum() {
-    let xNum = 1;
-    if (Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE)) > 0) {
-        xNum = Math.floor((window.innerWidth - SPACE) / (SPACE + SIZE));
-    }
-    if (xNum > query['num']) {
-        xNum = query['num'];
-    }
-    return xNum;
-}
