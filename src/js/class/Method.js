@@ -1,11 +1,19 @@
 import * as util from '../util';
 
 export default class Method {
+    static get DEFAULT_SIZE() {
+        return 180;
+    }
+
+    static get RATIO() {
+        return 1.0 / 9.0;
+    }
+
     constructor() {
         this.query = util.getQuery();
-        this.size = 180;
-        this.space = 20;
-        this.ratio = 1.0 / 9.0;
+        this.size = Method.DEFAULT_SIZE;
+        this.ratio = Method.RATIO;
+        this.space = this.getSpace();
         this.addCards();
     }
 
@@ -24,5 +32,9 @@ export default class Method {
             xNum = this.query['num'];
         }
         return xNum;
+    }
+
+    getSpace() {
+        return this.size * this.ratio;
     }
 }

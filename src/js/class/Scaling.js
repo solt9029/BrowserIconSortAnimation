@@ -36,8 +36,4 @@ export default class Scaling extends Method {
         let ySizeUnitNum = yNum * 1 + this.ratio * (yNum + 1);
         return window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
     }
-
-    getSpace() {
-        return this.size * this.ratio;
-    }
 }

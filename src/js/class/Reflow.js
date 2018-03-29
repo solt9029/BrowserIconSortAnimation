@@ -30,15 +30,12 @@ export default class Reflow extends Method {
         if (this.prevXNum === currentXNum) {
             return;
         }
-
         for (let xNum = this.prevXNum + 1; xNum < currentXNum + 1; xNum++) {
             this.animateCards(xNum);
         }
-
         for (let xNum = this.prevXNum - 1; xNum > currentXNum - 1; xNum--) {
             this.animateCards(xNum);
         }
-
         this.prevXNum = currentXNum;
         return;
     }
