@@ -4,11 +4,7 @@ export default class Reflow extends Method {
     constructor() {
         super();
         this.prevXNum = 0;
-        this.reflow();
-        let reflow = this;
-        $(window).on('resize', function() {
-            reflow.reflow();
-        })
+        this.init();
     }
 
     animateCards(xNum) {
@@ -25,7 +21,7 @@ export default class Reflow extends Method {
         }
     }
 
-    reflow() {
+    method() {
         let currentXNum = this.getXNum();
         if (this.prevXNum === currentXNum) {
             return;

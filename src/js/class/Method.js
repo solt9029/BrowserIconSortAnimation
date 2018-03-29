@@ -17,6 +17,17 @@ export default class Method {
         this.addCards();
     }
 
+    init() {
+        this.method();
+        let method = this;
+        $(window).on('resize', function() {
+            method.method();
+        });
+    }
+
+    method() {
+    }
+
     addCards() {
         for (let i = 0; i < this.query['num']; i++) {
             $('body').append(`<div class="card" id="card${i}">${i}</div>`);

@@ -6,11 +6,7 @@ export default class Proposed extends Method {
         super();
         this.prevXNum = 0;
         this.patterns = this.getPatterns();
-        this.proposed();
-        let proposed = this;
-        $(window).on('resize', function() {
-            proposed.proposed();
-        });
+        this.init();
     }
 
     animateCards(xNum) {
@@ -27,7 +23,7 @@ export default class Proposed extends Method {
         }
     }
 
-    proposed() {
+    method() {
         let currentXNum = this.getXNum();
         if (this.prevXNum === currentXNum) {
             return;
