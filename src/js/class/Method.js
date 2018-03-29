@@ -13,7 +13,7 @@ export default class Method {
         this.query = util.getQuery();
         this.size = Method.DEFAULT_SIZE;
         this.ratio = Method.RATIO;
-        this.space = this.getSpace();
+        this.space = this.size * this.ratio;
         this.addCards();
     }
 
@@ -43,9 +43,5 @@ export default class Method {
             xNum = this.query['num'];
         }
         return xNum;
-    }
-
-    getSpace() {
-        return this.size * this.ratio;
     }
 }

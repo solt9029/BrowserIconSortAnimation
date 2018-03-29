@@ -8,7 +8,7 @@ export default class Scaling extends Method {
 
     method() {
         this.size = this.getSize();
-        this.space = this.getSpace();
+        this.space = this.size * this.ratio;
         this.animateCards();
     }
 
