@@ -33,23 +33,6 @@ export default class Scaling extends Method {
         }
     }
 
-    addCards() {
-        for (let i = 0; i < this.query['num']; i++) {
-            $('body').append(`<div class="card" id="card${i}">${i}</div>`);
-        }
-    }
-
-    getXNum() {
-        let xNum = 1;
-        if (Math.floor((window.innerWidth - this.space) / (this.space + this.size)) > 0) {
-            xNum = Math.floor((window.innerWidth - this.space) / (this.space + this.size));
-        }
-        if (xNum > this.query['num']) {
-            xNum = this.query['num'];
-        }
-        return xNum;
-    }
-
     getSize() {
         let yNum = Math.ceil(this.query['num'] / this.query['xnum']);
         let xSizeUnitNum = this.query['xnum'] * 1 + this.ratio * (this.query['xnum'] + 1);
