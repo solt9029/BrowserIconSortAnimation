@@ -1,6 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-require("bootstrap");
-
 $(() => {
     $('#proposed').click(() => {
         location.href = './proposed.html?step=0&animation=500&xnum=4&num=' + $('#num').val(); 

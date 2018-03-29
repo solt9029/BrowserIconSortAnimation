@@ -1,5 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-require("bootstrap");
 import '../scss/hybrid.scss';
 import * as util from './util';
 import { RATIO, MIN_SIZE, MIN_SPACE } from './const';

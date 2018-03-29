@@ -7,10 +7,11 @@ module.exports = {
     proposed: __dirname + '/src/js/proposed.js',
     reflow: __dirname + '/src/js/reflow.js',
     scaling: __dirname + '/src/js/scaling.js',
-    hybrid: __dirname + '/src/js/hybrid.js'
+    hybrid: __dirname + '/src/js/hybrid.js',
+    bootstrap: __dirname + '/src/js/bootstrap.js'
   },
   output: {
-    path: __dirname+"/dist/js",
+    path: __dirname + "/dist/js",
     filename: '[name].bundle.js'
   },
   plugins: [
@@ -21,7 +22,7 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: __dirname+"/dist",
+    contentBase: __dirname + "/dist",
     port: 8080
   },
   devtool: 'source-map',
