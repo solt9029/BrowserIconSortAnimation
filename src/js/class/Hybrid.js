@@ -6,10 +6,6 @@ export default class Hybrid extends Method {
         return 90;
     }
 
-    constructor() {
-        super();
-    }
-
     method() {
         const min_size = Hybrid.MIN_SIZE;
         const min_space = Hybrid.MIN_SIZE * Method.RATIO;

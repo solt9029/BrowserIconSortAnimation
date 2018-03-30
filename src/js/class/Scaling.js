@@ -1,10 +1,6 @@
 import Method from './Method';
 
 export default class Scaling extends Method {
-    constructor() {
-        super();
-    }
-
     method() {
         this.size = this.getSize();
         this.space = this.size * Method.RATIO;

@@ -2,10 +2,6 @@ import Method from './Method';
 import * as util from '../util';
 
 export default class Proposed extends Method {
-    constructor() {
-        super();
-    }
-
     animateCards(xNum) {
         for (let y = 0; y < Math.ceil(this.query['num'] / xNum); y++) {
             for (let x = 0; x < xNum; x++) {
