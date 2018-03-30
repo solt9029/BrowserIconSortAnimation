@@ -13,6 +13,9 @@ export default class Method {
         this.query = util.getQuery();
         this.size = Method.DEFAULT_SIZE;
         this.space = this.size * Method.RATIO;
+        this.baseYNum = Math.ceil(this.query['num'] / this.query['xnum']);
+        this.prevXNum = 0;
+        this.patterns = this.getPatterns();
         this.addCards();
     }
 

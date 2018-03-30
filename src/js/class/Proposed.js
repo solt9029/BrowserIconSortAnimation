@@ -4,8 +4,6 @@ import * as util from '../util';
 export default class Proposed extends Method {
     constructor() {
         super();
-        this.prevXNum = 0;
-        this.patterns = this.getPatterns();
         this.init();
     }
 

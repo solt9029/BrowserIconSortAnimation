@@ -3,7 +3,6 @@ import Method from './Method';
 export default class Reflow extends Method {
     constructor() {
         super();
-        this.prevXNum = 0;
         this.init();
     }
 

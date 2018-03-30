@@ -8,9 +8,6 @@ export default class Hybrid extends Method {
 
     constructor() {
         super();
-        this.baseYNum = Math.ceil(this.query['num'] / this.query['xnum']);
-        this.prevXNum = this.query['xnum'];
-        this.patterns = this.getPatterns();
         this.init();
     }
 
