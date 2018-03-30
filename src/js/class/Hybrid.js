@@ -2,13 +2,9 @@ import Method from './Method';
 import * as util from '../util';
 
 export default class Hybrid extends Method {
-    static get MIN_SIZE() {
-        return 90;
-    }
-
     method() {
-        const min_size = Hybrid.MIN_SIZE;
-        const min_space = Hybrid.MIN_SIZE * Method.RATIO;
+        const min_size = Method.MIN_SIZE;
+        const min_space = Method.MIN_SIZE * Method.RATIO;
         let currentXNum = this.getXNum(min_size, min_space);
         let currentYNum = this.getYNum(min_size, min_space);
 
@@ -16,7 +12,7 @@ export default class Hybrid extends Method {
             this.scaling();
             this.prevXNum = currentXNum;
         } else {
-            this.size = Hybrid.MIN_SIZE;
+            this.size = Method.MIN_SIZE;
             this.space = this.size * Method.RATIO;
             if (currentXNum < this.query['xnum']) {
                 this.proposed(currentXNum); // 提案手法

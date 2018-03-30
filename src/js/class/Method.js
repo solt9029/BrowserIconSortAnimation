@@ -9,6 +9,10 @@ export default class Method {
         return 1.0 / 9.0;
     }
 
+    static get MIN_SIZE() {
+        return 90;
+    }
+
     constructor() {
         this.query = util.getQuery();
         this.size = Method.DEFAULT_SIZE;
