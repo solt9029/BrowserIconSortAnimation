@@ -25,11 +25,4 @@ export default class Scaling extends Method {
             }
         }
     }
-
-    getSize() {
-        let yNum = Math.ceil(this.query['num'] / this.query['xnum']);
-        let xSizeUnitNum = this.query['xnum'] * 1 + Method.RATIO * (this.query['xnum'] + 1);
-        let ySizeUnitNum = yNum * 1 + Method.RATIO * (yNum + 1);
-        return window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
-    }
 }
