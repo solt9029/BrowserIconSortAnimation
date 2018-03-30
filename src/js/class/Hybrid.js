@@ -16,7 +16,7 @@ export default class Hybrid extends Method {
 
     method() {
         const min_size = Hybrid.MIN_SIZE;
-        const min_space = Hybrid.MIN_SIZE * Hybrid.RATIO;
+        const min_space = Hybrid.MIN_SIZE * Method.RATIO;
         let currentXNum = this.getXNum(min_size, min_space);
         let currentYNum = this.getYNum(min_size, min_space);
 
@@ -25,7 +25,7 @@ export default class Hybrid extends Method {
             this.prevXNum = currentXNum;
         } else {
             this.size = Hybrid.MIN_SIZE;
-            this.space = this.size * Hybrid.RATIO;
+            this.space = this.size * Method.RATIO;
             if (currentXNum < this.query['xnum']) {
                 this.proposed(currentXNum); // 提案手法
             } else if (currentYNum < this.baseYNum) {
@@ -45,7 +45,7 @@ export default class Hybrid extends Method {
 
     scaling() {
         this.size = this.getSize();
-        this.space = this.size * Hybrid.RATIO;
+        this.space = this.size * Method.RATIO;
         this.animateScalingCards();
     }
 
@@ -107,8 +107,8 @@ export default class Hybrid extends Method {
 
     getSize() {
         let yNum = Math.ceil(this.query['num'] / this.query['xnum']);
-        let xSizeUnitNum = this.query['xnum'] * 1 + this.ratio * (this.query['xnum'] + 1);
-        let ySizeUnitNum = yNum * 1 + this.ratio * (yNum + 1);
+        let xSizeUnitNum = this.query['xnum'] * 1 + Method.RATIO * (this.query['xnum'] + 1);
+        let ySizeUnitNum = yNum * 1 + Method.RATIO * (yNum + 1);
         return window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
     }
 

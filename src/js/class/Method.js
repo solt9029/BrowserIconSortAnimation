@@ -12,8 +12,7 @@ export default class Method {
     constructor() {
         this.query = util.getQuery();
         this.size = Method.DEFAULT_SIZE;
-        this.ratio = Method.RATIO;
-        this.space = this.size * this.ratio;
+        this.space = this.size * Method.RATIO;
         this.addCards();
     }
 
