@@ -3,7 +3,9 @@ export function newTwoDimensionalArray(x, y) {
 }
 
 export function getQuery() {
-    if(window.location.search === "") return;
+    if (window.location.search === "") {
+        return;
+    }
     const variables = window.location.search.split("?")[1].split("&");
     const obj = {};
     variables.forEach(function(v, i) {
