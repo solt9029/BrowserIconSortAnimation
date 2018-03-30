@@ -1,4 +1,4 @@
-import '../scss/proposed.scss';
+import '../scss/hybrid.scss';
 import Hybrid from './class/Hybrid';
 
 $(() => {
