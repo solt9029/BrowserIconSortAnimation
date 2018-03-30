@@ -17,16 +17,14 @@ export default class Method {
         this.prevXNum = 0;
         this.patterns = this.getPatterns();
         this.addCards();
-    }
 
-    init() {
         this.method();
         let method = this;
         $(window).on('resize', function() {
             method.method();
         });
     }
-
+    
     method() {
     }
 

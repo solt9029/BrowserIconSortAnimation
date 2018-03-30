@@ -4,7 +4,6 @@ import * as util from '../util';
 export default class Proposed extends Method {
     constructor() {
         super();
-        this.init();
     }
 
     animateCards(xNum) {

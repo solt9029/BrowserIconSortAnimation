@@ -8,7 +8,6 @@ export default class Hybrid extends Method {
 
     constructor() {
         super();
-        this.init();
     }
 
     method() {
