@@ -10,7 +10,6 @@ export default class Hybrid extends Method {
         super();
         this.baseYNum = Math.ceil(this.query['num'] / this.query['xnum']);
         this.prevXNum = this.query['xnum'];
-        this.prevYNum = this.baseYNum;
         this.patterns = this.getPatterns();
         this.init();
     }
@@ -24,7 +23,6 @@ export default class Hybrid extends Method {
         if (currentXNum >= this.query['xnum'] && currentYNum >= this.baseYNum) {
             this.scaling();
             this.prevXNum = currentXNum;
-            this.prevYNum = currentYNum;
         } else {
             this.size = Hybrid.MIN_SIZE;
             this.space = this.size * Hybrid.RATIO;
