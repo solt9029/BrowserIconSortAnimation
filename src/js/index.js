@@ -9,6 +9,6 @@ $(() => {
         location.href = './scaling.html?animation=500&xnum=4&num=' + $('#num').val();
     });
     $('#hybrid').click(() => {
-        location.href = './hybrid.html?step=0&animation=500&xnum=4&num=' + $('#num').val();
+        location.href = './hybrid.html?animation=500&xnum=4&num=' + $('#num').val();
     });
 });
