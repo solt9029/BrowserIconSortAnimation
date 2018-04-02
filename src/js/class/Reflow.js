@@ -1,30 +1,16 @@
 import Method from './Method';
 
 export default class Reflow extends Method {
-    animateCards(xNum) {
-        for (let y = 0; y < Math.ceil(this.query['num'] / xNum); y++) {
-            for (let x = 0; x < xNum; x++) {
-                if (!this.query['step']) {
-                    $(`#card${x + y * xNum}`).stop();
-                }
-                $(`#card${x + y * xNum}`).animate({
-                    'top': (y * (this.size + this.space) + this.space) + 'px',
-                    'left': (x * (this.size + this.space) + this.space) + 'px'
-                }, this.query['animation']);
-            }
-        }
-    }
-
     method() {
         let currentXNum = this.getXNum(this.size, this.space);
         if (this.prevXNum === currentXNum) {
             return;
         }
         for (let xNum = this.prevXNum + 1; xNum < currentXNum + 1; xNum++) {
-            this.animateCards(xNum);
+            this.animateOrderCards(xNum);
         }
         for (let xNum = this.prevXNum - 1; xNum > currentXNum - 1; xNum--) {
-            this.animateCards(xNum);
+            this.animateOrderCards(xNum);
         }
         this.prevXNum = currentXNum;
         return;

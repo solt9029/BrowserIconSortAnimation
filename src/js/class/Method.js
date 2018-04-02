@@ -28,6 +28,42 @@ export default class Method {
             method.method();
         });
     }
+
+    // patternに合わせて並べる（Proposed）
+    animatePatternCards(xNum) {
+        for (let y = 0; y < Math.ceil(this.query['num'] / xNum); y++) {
+            for (let x = 0; x < xNum; x++) {
+                if (!this.query['step']) {
+                    $(`#card${this.patterns[xNum - 1][x + y * xNum]}`).stop();
+                }
+                $(`#card${this.patterns[xNum - 1][x + y * xNum]}`).animate({
+                    'top': (y * (this.size + this.space) + this.space) + 'px',
+                    'left': (x * (this.size + this.space) + this.space) + 'px',
+                    'width': this.size + 'px',
+                    'height': this.size + 'px',
+                    'fontSize': this.size / 2 + 'px'
+                }, this.query['animation']);
+            }
+        }
+    }
+
+    // 順番通りに並べる（ReflowとかScaling）
+    animateOrderCards(xNum) {
+        for (let y = 0; y < Math.ceil(this.query['num'] / xNum); y++) {
+            for (let x = 0; x < xNum; x++) {
+                if (!this.query['step']) {
+                    $(`#card${x + y * xNum}`).stop();
+                }
+                $(`#card${x + y * xNum}`).animate({
+                    'top': (y * (this.size + this.space) + this.space) + 'px',
+                    'left': (x * (this.size + this.space) + this.space) + 'px',
+                    'width': this.size + 'px',
+                    'height': this.size + 'px',
+                    'fontSize': this.size / 2 + 'px'
+                }, this.query['animation']);
+            }
+        }
+    }
     
     method() {
     }

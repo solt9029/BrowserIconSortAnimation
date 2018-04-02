@@ -34,7 +34,7 @@ export default class Hybrid extends Method {
     scaling() {
         this.size = this.getSize();
         this.space = this.size * Method.RATIO;
-        this.animateScalingCards();
+        this.animateOrderCards(this.query['xnum']);
     }
 
     proposed(currentXNum) {
@@ -44,41 +44,13 @@ export default class Hybrid extends Method {
         }
         // 幅が広がる場合
         for (let xNum = this.prevXNum + 1; xNum < currentXNum + 1; xNum++) {
-            this.animateProposedCards(xNum);
+            this.animatePatternCards(xNum);
         }
         // 幅が狭まる場合
         for (let xNum = this.prevXNum - 1; xNum > currentXNum - 1; xNum--) {
-            this.animateProposedCards(xNum);
+            this.animatePatternCards(xNum);
         }
         this.prevXNum = currentXNum;
         return;
-    }
-
-    animateProposedCards(xNum) {
-        for (let y = 0; y < Math.ceil(this.query['num'] / xNum); y++) {
-            for (let x = 0; x < xNum; x++) {
-                $(`#card${this.patterns[xNum - 1][x + y * xNum]}`).stop().animate({
-                    'top': (y * (this.size + this.space) + this.space) + 'px',
-                    'left': (x * (this.size + this.space) + this.space) + 'px',
-                    'width': this.size + 'px',
-                    'height': this.size + 'px',
-                    'fontSize': this.size / 2 + 'px'
-                }, this.query['animation']);
-            }
-        }
-    }
-
-    animateScalingCards() {
-        for (let y = 0; y < Math.ceil(this.query['num'] / this.query['xnum']); y++) {
-            for (let x = 0; x < this.query['xnum']; x++) {
-                $(`#card${x + y * this.query['xnum']}`).stop().animate({
-                    'top': (y * (this.size + this.space) + this.space) + 'px',
-                    'left': (x * (this.size + this.space) + this.space) + 'px',
-                    'width': this.size + 'px',
-                    'height': this.size + 'px',
-                    'fontSize': this.size / 2 + 'px'
-                }, this.query['animation']);
-            }
-        }
     }
 }
