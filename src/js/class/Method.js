@@ -3,7 +3,7 @@ import * as util from '../util';
 export default class Method {
     constructor() {
         this.query = util.getQuery();
-        this.size = this.query['default_size'];
+        this.size = this.query['defaultSize'];
         this.space = this.size * this.query['ratio'];
         this.baseYNum = Math.ceil(this.query['num'] / this.query['xnum']);
         this.prevXNum = 0;
@@ -90,15 +90,15 @@ export default class Method {
     }
 
     hybrid() {
-        const MIN_SPACE = this.query['min_size'] * this.query['ratio'];
-        let currentXNum = this.getXNum(this.query['min_size'], MIN_SPACE);
-        let currentYNum = this.getYNum(this.query['min_size'], MIN_SPACE);
+        const MIN_SPACE = this.query['minSize'] * this.query['ratio'];
+        let currentXNum = this.getXNum(this.query['minSize'], MIN_SPACE);
+        let currentYNum = this.getYNum(this.query['minSize'], MIN_SPACE);
 
         if (currentXNum >= this.query['xnum'] && currentYNum >= this.baseYNum) {
             this.scaling();
             this.prevXNum = currentXNum;
         } else {
-            this.size = this.query['min_size'];
+            this.size = this.query['minSize'];
             this.space = this.size * this.query['ratio'];
             if (currentXNum < this.query['xnum']) {
                 this.proposed(currentXNum); // 提案手法
