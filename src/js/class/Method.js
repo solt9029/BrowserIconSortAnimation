@@ -1,22 +1,10 @@
 import * as util from '../util';
 
 export default class Method {
-    static get DEFAULT_SIZE() {
-        return 180;
-    }
-
-    static get RATIO() {
-        return 1.0 / 9.0;
-    }
-
-    static get MIN_SIZE() {
-        return 90;
-    }
-
     constructor() {
         this.query = util.getQuery();
-        this.size = Method.DEFAULT_SIZE;
-        this.space = this.size * Method.RATIO;
+        this.size = this.query['default_size'];
+        this.space = this.size * this.query['ratio'];
         this.baseYNum = Math.ceil(this.query['num'] / this.query['xnum']);
         this.prevXNum = 0;
         this.patterns = this.getPatterns();
@@ -67,7 +55,7 @@ export default class Method {
 
     scaling() {
         this.size = this.getSize();
-        this.space = this.size * Method.RATIO;
+        this.space = this.size * this.query['ratio'];
         this.animateOrderCards(this.query['xnum']);
     }
 
@@ -102,16 +90,16 @@ export default class Method {
     }
 
     hybrid() {
-        const MIN_SPACE = Method.MIN_SIZE * Method.RATIO;
-        let currentXNum = this.getXNum(Method.MIN_SIZE, MIN_SPACE);
-        let currentYNum = this.getYNum(Method.MIN_SIZE, MIN_SPACE);
+        const MIN_SPACE = this.query['min_size'] * this.query['ratio'];
+        let currentXNum = this.getXNum(this.query['min_size'], MIN_SPACE);
+        let currentYNum = this.getYNum(this.query['min_size'], MIN_SPACE);
 
         if (currentXNum >= this.query['xnum'] && currentYNum >= this.baseYNum) {
             this.scaling();
             this.prevXNum = currentXNum;
         } else {
-            this.size = Method.MIN_SIZE;
-            this.space = this.size * Method.RATIO;
+            this.size = this.query['min_size'];
+            this.space = this.size * this.query['ratio'];
             if (currentXNum < this.query['xnum']) {
                 this.proposed(currentXNum); // 提案手法
             } else if (currentYNum < this.baseYNum) {
@@ -162,8 +150,8 @@ export default class Method {
 
     getSize() {
         let yNum = Math.ceil(this.query['num'] / this.query['xnum']);
-        let xSizeUnitNum = this.query['xnum'] * 1 + Method.RATIO * (this.query['xnum'] + 1);
-        let ySizeUnitNum = yNum * 1 + Method.RATIO * (yNum + 1);
+        let xSizeUnitNum = this.query['xnum'] * 1 + this.query['ratio'] * (this.query['xnum'] + 1);
+        let ySizeUnitNum = yNum * 1 + this.query['ratio'] * (yNum + 1);
         return window.innerWidth / xSizeUnitNum > window.innerHeight / ySizeUnitNum ? window.innerHeight / ySizeUnitNum : window.innerWidth / xSizeUnitNum;
     }
 
