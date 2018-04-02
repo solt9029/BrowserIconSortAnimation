@@ -24,13 +24,7 @@ export default class Method {
                 if (!this.query['step']) {
                     $(`#card${this.patterns[xNum - 1][x + y * xNum]}`).stop();
                 }
-                $(`#card${this.patterns[xNum - 1][x + y * xNum]}`).animate({
-                    'top': (y * (this.size + this.space) + this.space) + 'px',
-                    'left': (x * (this.size + this.space) + this.space) + 'px',
-                    'width': this.size + 'px',
-                    'height': this.size + 'px',
-                    'fontSize': this.size / 2 + 'px'
-                }, this.query['animation']);
+                $(`#card${this.patterns[xNum - 1][x + y * xNum]}`).animate(this.getAnimateJson(x, y), this.query['animation']);
             }
         }
     }
@@ -42,15 +36,19 @@ export default class Method {
                 if (!this.query['step']) {
                     $(`#card${x + y * xNum}`).stop();
                 }
-                $(`#card${x + y * xNum}`).animate({
-                    'top': (y * (this.size + this.space) + this.space) + 'px',
-                    'left': (x * (this.size + this.space) + this.space) + 'px',
-                    'width': this.size + 'px',
-                    'height': this.size + 'px',
-                    'fontSize': this.size / 2 + 'px'
-                }, this.query['animation']);
+                $(`#card${x + y * xNum}`).animate(this.getAnimateJson(x, y), this.query['animation']);
             }
         }
+    }
+
+    getAnimateJson(x, y) {
+        return {
+            'top': (y * (this.size + this.space) + this.space) + 'px',
+            'left': (x * (this.size + this.space) + this.space) + 'px',
+            'width': this.size + 'px',
+            'height': this.size + 'px',
+            'fontSize': this.size / 2 + 'px'
+        };
     }
 
     scaling() {
