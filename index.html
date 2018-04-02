@@ -9,8 +9,32 @@
     <div class="container">
         <h1>アイコン整列のアニメーション</h1>
         <div class="form-group">
-            <label for="num">アイコン数：</label>
+            <label for="num">アイコン数（個）：</label>
             <input type="number" class="form-control" id="num" value="16">
+        </div>
+        <div class="form-group">
+            <label for="xnum">基準とする横に並ぶアイコン数（個）：</label>
+            <input type="number" class="form-control" id="xnum" value="4">
+        </div>
+        <div class="form-group">
+            <label for="defaultSize">デフォルトサイズ（ピクセル）：</label>
+            <input type="number" class="form-control" id="defaultSize" value="180">
+        </div>
+        <div class="form-group">
+            <label for="minSize">最小サイズ（ピクセル）：</label>
+            <input type="number" class="form-control" id="minSize" value="90">
+        </div>
+        <div class="form-group">
+            <label for="animation">アニメーション時間（ミリ秒）：</label>
+            <input type="number" class="form-control" id="animation" value="300">
+        </div>
+        <div class="form-group">
+            <label for="ratio">サイズに対するスペースの比率：</label>
+            <input type="number" class="form-control" id="ratio" value="0.1">
+        </div>
+        <div class="form-group">
+            <label for="step">段階的に表示するかどうか：</label>
+            <input type="checkbox" name="step" value="1" id="step">
         </div>
         <button class="btn btn-success btn-block" id="proposed">提案手法</button>
         <button class="btn btn-warning btn-block" id="reflow">Reflow</button>
