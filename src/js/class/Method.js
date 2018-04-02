@@ -70,6 +70,36 @@ export default class Method {
         this.space = this.size * Method.RATIO;
         this.animateOrderCards(this.query['xnum']);
     }
+
+    proposed(endXNum) {
+        if (this.prevXNum === endXNum) {
+            return;
+        }
+        // 幅が広がる場合
+        for (let xNum = this.prevXNum + 1; xNum < endXNum + 1; xNum++) {
+            this.animatePatternCards(xNum);
+        }
+        // 幅が狭まる場合
+        for (let xNum = this.prevXNum - 1; xNum > endXNum - 1; xNum--) {
+            this.animatePatternCards(xNum);
+        }
+        this.prevXNum = endXNum;
+        return;
+    }
+
+    reflow(endXNum) {
+        if (this.prevXNum === endXNum) {
+            return;
+        }
+        for (let xNum = this.prevXNum + 1; xNum < endXNum + 1; xNum++) {
+            this.animateOrderCards(xNum);
+        }
+        for (let xNum = this.prevXNum - 1; xNum > endXNum - 1; xNum--) {
+            this.animateOrderCards(xNum);
+        }
+        this.prevXNum = endXNum;
+        return;
+    }
     
     method() {
     }
