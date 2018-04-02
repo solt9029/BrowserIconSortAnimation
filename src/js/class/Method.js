@@ -64,6 +64,12 @@ export default class Method {
             }
         }
     }
+
+    scaling() {
+        this.size = this.getSize();
+        this.space = this.size * Method.RATIO;
+        this.animateOrderCards(this.query['xnum']);
+    }
     
     method() {
     }

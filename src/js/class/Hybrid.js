@@ -31,12 +31,6 @@ export default class Hybrid extends Method {
         } 
     }
 
-    scaling() {
-        this.size = this.getSize();
-        this.space = this.size * Method.RATIO;
-        this.animateOrderCards(this.query['xnum']);
-    }
-
     proposed(currentXNum) {
         // let currentXNum = this.getXNum(this.size, this.space);
         if (this.prevXNum === currentXNum) {
