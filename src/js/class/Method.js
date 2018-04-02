@@ -100,6 +100,34 @@ export default class Method {
         this.prevXNum = endXNum;
         return;
     }
+
+    hybrid() {
+        const MIN_SPACE = Method.MIN_SIZE * Method.RATIO;
+        let currentXNum = this.getXNum(Method.MIN_SIZE, MIN_SPACE);
+        let currentYNum = this.getYNum(Method.MIN_SIZE, MIN_SPACE);
+
+        if (currentXNum >= this.query['xnum'] && currentYNum >= this.baseYNum) {
+            this.scaling();
+            this.prevXNum = currentXNum;
+        } else {
+            this.size = Method.MIN_SIZE;
+            this.space = this.size * Method.RATIO;
+            if (currentXNum < this.query['xnum']) {
+                this.proposed(currentXNum); // 提案手法
+            } else if (currentYNum < this.baseYNum) {
+                // whileを利用した提案手法
+                let xNum = this.query['xnum'];
+                while (xNum < currentXNum) {
+                    xNum++;
+                    let yNum = Math.ceil(this.query['num'] / xNum);
+                    if (yNum <= currentYNum) {
+                        break;
+                    }
+                }
+                this.proposed(xNum);
+            }
+        } 
+    }
     
     method() {
     }
