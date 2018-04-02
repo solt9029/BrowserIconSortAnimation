@@ -1,5 +1,4 @@
 import Method from './Method';
-import * as util from '../util';
 
 export default class Proposed extends Method {
     method() {
